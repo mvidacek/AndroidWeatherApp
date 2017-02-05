@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+
+    <string name="weather_api_appID">4b014e050376eb5193e72a52b7785d29</string>
+
+    <string-array name="Cities">
+        <item>Zagreb</item>
+        <item>London</item>
+        <item>Moscow</item>
+    </string-array>
+    <string name="title_activity_show_youtube_video">ShowYoutubeVideoActivity</string>
+    <string name="title_activity_youtube">YoutubeActivity</string>
+    <string name="youtubeapikey">AIzaSyAKTHAfYD4JALas4Upke6PazQYSeIkpWU0</string>
+    <string name="listviewTemperature">Temperature(°C): </string>
+    <string name="numberPickerDescription">Unesite za koliko dana zelite vidjeti prognozu (3-7)</string>
+    <string name="nptext">Odaberite za koliko dana zelite vidjeti prognozu</string>
+</resources>

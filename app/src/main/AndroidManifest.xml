@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.mihovil.weatherapp">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".ChooseCityActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".PrognozaWidgetSettingsActivity"
+            android:label="Vremenska prognoza">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ShowCityWeatherActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ShowYoutubeVideoActivity" android:screenOrientation="landscape" />
+
+        <receiver android:name=".model.VrijemeWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="VrijemeWidgetProvider" />
+            </intent-filter>
+
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/prognoza_widget_provider">
+
+            </meta-data>
+        </receiver>
+
+        <service android:name=".model.VrijemeServis" />
+    </application>
+
+</manifest>
