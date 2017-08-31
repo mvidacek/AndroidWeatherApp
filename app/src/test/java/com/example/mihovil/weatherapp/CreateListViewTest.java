@@ -1,9 +1,9 @@
 package com.example.mihovil.weatherapp;
 
-import com.example.mihovil.weatherapp.model.Prognoza;
-import com.example.mihovil.weatherapp.model.PrognozaBuilder;
-import com.example.mihovil.weatherapp.model.Temp;
-import com.example.mihovil.weatherapp.model.Weather;
+import com.example.mihovil.weatherapp.model.PrognozaBuilder.Prognoza;
+import com.example.mihovil.weatherapp.model.PrognozaBuilder.PrognozaBuilder;
+import com.example.mihovil.weatherapp.model.RetrofitClasses.Temp;
+import com.example.mihovil.weatherapp.model.RetrofitClasses.Weather;
 
 import junit.framework.Assert;
 

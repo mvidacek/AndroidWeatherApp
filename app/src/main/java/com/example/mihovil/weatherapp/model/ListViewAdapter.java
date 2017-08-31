@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mihovil.weatherapp.R;
+import com.example.mihovil.weatherapp.model.PrognozaBuilder.Prognoza;
 
 import java.text.NumberFormat;
 import java.text.ParseException;

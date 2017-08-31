@@ -1,4 +1,4 @@
-package com.example.mihovil.weatherapp.model;
+package com.example.mihovil.weatherapp.model.RetrofitClasses;
 
 import java.util.HashMap;
 import java.util.Map;

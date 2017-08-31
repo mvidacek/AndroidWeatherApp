@@ -16,8 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.example.mihovil.weatherapp.model.VrijemeServis;
-import com.example.mihovil.weatherapp.model.VrijemeWidgetProvider;
+import com.example.mihovil.weatherapp.model.widgetService.VrijemeServis;
+import com.example.mihovil.weatherapp.model.widgetService.VrijemeWidgetProvider;
 
 /**
  * Created by Mihovil on 28/01/2017.

@@ -1,4 +1,4 @@
-package com.example.mihovil.weatherapp.model;
+package com.example.mihovil.weatherapp.model.widgetService;
 
 import android.app.IntentService;
 import android.content.Intent;

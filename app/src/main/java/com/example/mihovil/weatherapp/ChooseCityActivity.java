@@ -13,8 +13,8 @@ import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import com.example.mihovil.weatherapp.model.ConnectionState;
-import com.example.mihovil.weatherapp.model.GetToastFactory;
-import com.example.mihovil.weatherapp.model.Notificationfactory;
+import com.example.mihovil.weatherapp.model.ToastFactory.GetToastFactory;
+import com.example.mihovil.weatherapp.model.ToastFactory.Notificationfactory;
 import com.example.mylibrary.DebugTrace;
 
 import butterknife.BindView;

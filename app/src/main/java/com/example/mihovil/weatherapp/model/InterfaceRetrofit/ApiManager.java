@@ -1,7 +1,9 @@
-package com.example.mihovil.weatherapp.model;
+package com.example.mihovil.weatherapp.model.InterfaceRetrofit;
 
 import android.content.Context;
 import android.widget.Toast;
+
+import com.example.mihovil.weatherapp.model.RetrofitClasses.WeatherData;
 
 import retrofit2.Call;
 import retrofit2.Callback;

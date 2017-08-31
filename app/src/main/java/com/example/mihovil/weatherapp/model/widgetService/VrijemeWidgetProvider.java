@@ -1,4 +1,4 @@
-package com.example.mihovil.weatherapp.model;
+package com.example.mihovil.weatherapp.model.widgetService;
 
 import android.annotation.SuppressLint;
 import android.appwidget.AppWidgetManager;
@@ -6,18 +6,19 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.icu.text.SimpleDateFormat;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import com.example.mihovil.weatherapp.R;
-import com.example.mihovil.weatherapp.ShowYoutubeVideoActivity;
+import com.example.mihovil.weatherapp.model.InterfaceRetrofit.ApiManager;
+import com.example.mihovil.weatherapp.model.InterfaceRetrofit.RetrofitInterface;
+import com.example.mihovil.weatherapp.model.PrognozaBuilder.Prognoza;
+import com.example.mihovil.weatherapp.model.RetrofitClasses.WeatherData;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;

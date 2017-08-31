@@ -1,4 +1,4 @@
-package com.example.mihovil.weatherapp.model;
+package com.example.mihovil.weatherapp.model.ToastFactory;
 
 import android.content.Context;
 import android.widget.Toast;

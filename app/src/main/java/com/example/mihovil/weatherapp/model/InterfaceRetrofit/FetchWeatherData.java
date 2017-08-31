@@ -1,4 +1,4 @@
-package com.example.mihovil.weatherapp.model;
+package com.example.mihovil.weatherapp.model.InterfaceRetrofit;
 
 import android.content.Context;
 

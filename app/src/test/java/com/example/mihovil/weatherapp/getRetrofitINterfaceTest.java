@@ -1,8 +1,8 @@
 package com.example.mihovil.weatherapp;
 
-import com.example.mihovil.weatherapp.model.ApiManager;
-import com.example.mihovil.weatherapp.model.RetrofitInterface;
-import com.example.mihovil.weatherapp.model.WeatherData;
+import com.example.mihovil.weatherapp.model.InterfaceRetrofit.ApiManager;
+import com.example.mihovil.weatherapp.model.InterfaceRetrofit.RetrofitInterface;
+import com.example.mihovil.weatherapp.model.RetrofitClasses.WeatherData;
 
 import org.junit.Before;
 import org.junit.Rule;

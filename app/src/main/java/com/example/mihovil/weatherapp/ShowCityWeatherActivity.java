@@ -9,14 +9,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mihovil.weatherapp.model.ApiManager;
-import com.example.mihovil.weatherapp.model.GetToastFactory;
+import com.example.mihovil.weatherapp.model.InterfaceRetrofit.ApiManager;
+import com.example.mihovil.weatherapp.model.InterfaceRetrofit.RetrofitInterface;
 import com.example.mihovil.weatherapp.model.ListViewAdapter;
-import com.example.mihovil.weatherapp.model.Notificationfactory;
-import com.example.mihovil.weatherapp.model.Prognoza;
-import com.example.mihovil.weatherapp.model.PrognozaBuilder;
-import com.example.mihovil.weatherapp.model.RetrofitInterface;
-import com.example.mihovil.weatherapp.model.WeatherData;
+import com.example.mihovil.weatherapp.model.PrognozaBuilder.Prognoza;
+import com.example.mihovil.weatherapp.model.PrognozaBuilder.PrognozaBuilder;
+import com.example.mihovil.weatherapp.model.RetrofitClasses.WeatherData;
+import com.example.mihovil.weatherapp.model.ToastFactory.GetToastFactory;
+import com.example.mihovil.weatherapp.model.ToastFactory.Notificationfactory;
 import com.example.mylibrary.DebugTrace;
 
 import java.text.ParseException;

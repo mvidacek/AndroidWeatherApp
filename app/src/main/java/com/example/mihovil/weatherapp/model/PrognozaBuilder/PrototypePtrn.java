@@ -1,4 +1,4 @@
-package com.example.mihovil.weatherapp.model;
+package com.example.mihovil.weatherapp.model.PrognozaBuilder;
 
 /**
  * Created by Mihovil on 31/08/2017.

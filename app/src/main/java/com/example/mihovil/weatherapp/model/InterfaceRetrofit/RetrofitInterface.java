@@ -1,9 +1,8 @@
-package com.example.mihovil.weatherapp.model;
+package com.example.mihovil.weatherapp.model.InterfaceRetrofit;
 
-import java.util.List;
+import com.example.mihovil.weatherapp.model.RetrofitClasses.WeatherData;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
