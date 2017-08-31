@@ -18,7 +18,9 @@ import java.util.List;
  * Created by Mihovil on 26/1/2017.
  */
 public class ListViewAdapter extends ArrayAdapter<Prognoza> {
-    public ListViewAdapter(Context context, int resource) {
+
+    public ListViewAdapter(Context context, int resource)
+    {
         super(context, resource);
     }
 
@@ -47,13 +49,6 @@ public class ListViewAdapter extends ArrayAdapter<Prognoza> {
 
             weatherIcon.setImageResource(setImage(p.getDescription()));
 
-            int i;
-            try {
-                i=((Number)NumberFormat.getInstance().parse(p.getMinTemp())).intValue();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
             date.setText(p.getDate());
             description.setText(p.getDescription());
             minTemp.setText(parseTemp(p.getMinTemp()));
@@ -67,7 +62,7 @@ public class ListViewAdapter extends ArrayAdapter<Prognoza> {
 
         int i = 0;
         try {
-            i=((Number)NumberFormat.getInstance().parse(temp)).intValue();
+            i=(NumberFormat.getInstance().parse(temp)).intValue();
         } catch (ParseException e) {
             e.printStackTrace();
         }

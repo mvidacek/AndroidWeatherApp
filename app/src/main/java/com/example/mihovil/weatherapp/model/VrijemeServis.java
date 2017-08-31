@@ -9,13 +9,12 @@ import android.content.Intent;
 
 public class VrijemeServis extends IntentService {
 
-    private boolean cancel;
+    private boolean cancel = false;
     public VrijemeServis(){super("Vremenska prognoza servis");}
 
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        cancel = false;
         while (!cancel){
             try{
                 Thread.sleep(1000);

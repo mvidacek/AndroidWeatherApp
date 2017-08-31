@@ -3,7 +3,8 @@ package com.example.mihovil.weatherapp.model;
 /**
  * Created by Mihovil on 26/1/2017.
  */
-public class Prognoza {
+public class Prognoza implements PrototypePtrn {
+
     private String minTemp;
     private String maxTemp;
     private String description;
@@ -16,6 +17,10 @@ public class Prognoza {
         this.description = description;
         this.cityName = cityName;
         this.date = date;
+    }
+
+    public Prognoza(){
+
     }
 
     public String getMinTemp() {
@@ -61,5 +66,14 @@ public class Prognoza {
     @Override
     public String toString() {
         return date + ": " + description + "; minTemp: " + minTemp + "; maxTemp: " + maxTemp;
+    }
+
+
+    @Override
+    public PrototypePtrn getClone() {
+
+        PrognozaBuilder pb = new PrognozaBuilder(this.minTemp, this.maxTemp, this.description, this.cityName, this.date);
+
+        return pb.createPrognoza();
     }
 }

@@ -31,6 +31,7 @@ public class FetchWeatherData{
                     new InputStreamReader(connection.getInputStream()));
 
             StringBuffer json = new StringBuffer(1024);
+
             String tmp = "";
             while ((tmp = reader.readLine()) != null)
                 json.append(tmp).append("\n");
@@ -38,8 +39,6 @@ public class FetchWeatherData{
 
             JSONObject data = new JSONObject(json.toString());
 
-            // This value will be 404 if the request was not
-            // successful
             if (data.getInt("cod") != 200) {
                 return null;
             }

@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.util.Calendar;
@@ -20,9 +19,6 @@ import android.widget.EditText;
 import com.example.mihovil.weatherapp.model.VrijemeServis;
 import com.example.mihovil.weatherapp.model.VrijemeWidgetProvider;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * Created by Mihovil on 28/01/2017.
  */
@@ -31,7 +27,7 @@ public class PrognozaWidgetSettingsActivity extends Activity {
 
     private AlarmManager alarmManager;
     private PendingIntent pendingIntent;
-    private String nazivGrada;
+    private String nazivGrada = "";
 
 
     @Override

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.mihovil.weatherapp.model.YoutubeHelper;
+import com.example.mylibrary.DebugTrace;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -35,6 +36,7 @@ public class ShowYoutubeVideoActivity extends YouTubeBaseActivity implements You
         youtube.initialize(youtubeApiKey, this);
     }
 
+    @DebugTrace
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
         if(youTubePlayer == null){

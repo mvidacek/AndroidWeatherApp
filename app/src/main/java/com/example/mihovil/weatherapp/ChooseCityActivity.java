@@ -12,16 +12,26 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
+import com.example.mihovil.weatherapp.model.ConnectionState;
+import com.example.mihovil.weatherapp.model.GetToastFactory;
+import com.example.mihovil.weatherapp.model.Notificationfactory;
+import com.example.mylibrary.DebugTrace;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ChooseCityActivity extends AppCompatActivity {
 
-    @BindView(R.id.etNazivGrada) EditText etNazivGrada;
-    @BindView(R.id.npdays) NumberPicker npKolikoDana;
-    @BindView(R.id.btnConfirm) Button btnConfirm;
+    @BindView(R.id.etNazivGrada)
+    EditText etNazivGrada;
+    @BindView(R.id.npdays)
+    NumberPicker npKolikoDana;
+    @BindView(R.id.btnConfirm)
+    Button btnConfirm;
 
+    private static ConnectionState connState;
     private ConnectivityManager checkConnection;
+    private GetToastFactory toastFactory = new GetToastFactory();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,31 +40,61 @@ public class ChooseCityActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        checkConnection = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        connectToService();
 
-        provijeriVezu();
+        checkConnection();
 
-        npKolikoDana.setMinValue(1);
-        npKolikoDana.setMaxValue(7);
-        npKolikoDana.setValue(3);
+        setDaysLimit();
 
+        addBtnListener();
+
+
+        Notificationfactory message = toastFactory.getToast(Toast.LENGTH_LONG, getApplicationContext());
+        message.writeToastMessage("placeholder text");
+    }
+
+    private void addBtnListener() {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if( etNazivGrada.getText().toString() != ""){
-                    if(provijeriVezu()){
+                    if(connState.isON()){
                         GetWeather(etNazivGrada.getText().toString());
                     }
                 }else{
-                    Toast.makeText(getApplicationContext(), "Morate unjeti naziv grada", Toast.LENGTH_LONG);
+                    Notificationfactory message = toastFactory.getToast(Toast.LENGTH_LONG, getApplicationContext());
+                    message.writeToastMessage("Morate unjeti naziv grada");
                 }
             }
         });
     }
 
-    private boolean provijeriVezu() {
+    private void setDaysLimit() {
+        npKolikoDana.setMinValue(1);
+        npKolikoDana.setMaxValue(7);
+        npKolikoDana.setValue(3);
+    }
+
+
+    @DebugTrace
+    private void connectToService() {
+        checkConnection = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        try{
+            Thread.sleep(100);
+        }catch (InterruptedException ex){
+            ex.printStackTrace();
+        }
+
+        connState = ConnectionState.getInstance((ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE));
+
+        connState.showNetworkInfo(this);
+    }
+
+    private boolean checkConnection() {
         if(checkConnection.getActiveNetworkInfo() == null){
-            Toast.makeText(this, "Aplikacija nema pristup internetu. \nAplikacija nece moci pristupiti potrebnim materijalima", Toast.LENGTH_LONG).show();
+            Notificationfactory message = toastFactory.getToast(Toast.LENGTH_LONG, getApplicationContext());
+            message.writeToastMessage("Aplikacija nema pristup internetu. \nAplikacija nece moci pristupiti potrebnim materijalima");
             return false;
         }
         return true;

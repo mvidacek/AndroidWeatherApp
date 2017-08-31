@@ -2,9 +2,7 @@ package com.example.mihovil.weatherapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -12,13 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mihovil.weatherapp.model.ApiManager;
-import com.example.mihovil.weatherapp.model.City;
-import com.example.mihovil.weatherapp.model.FetchWeatherData;
+import com.example.mihovil.weatherapp.model.GetToastFactory;
 import com.example.mihovil.weatherapp.model.ListViewAdapter;
+import com.example.mihovil.weatherapp.model.Notificationfactory;
 import com.example.mihovil.weatherapp.model.Prognoza;
+import com.example.mihovil.weatherapp.model.PrognozaBuilder;
 import com.example.mihovil.weatherapp.model.RetrofitInterface;
 import com.example.mihovil.weatherapp.model.WeatherData;
-
+import com.example.mylibrary.DebugTrace;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,19 +31,19 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ShowCityWeatherActivity extends AppCompatActivity {
 
     private WeatherData model;
+    private String cityName;
+    private int count;
+    private GetToastFactory toastFactory = new GetToastFactory();
 
     @BindView(R.id.listViewPrognoza)
     ListView weatherView;
     @BindView(R.id.tvNazivGrada)
     TextView tvCityName;
 
-    Handler threadHandler;
     private List<Prognoza> listWeatherReport = new ArrayList<>();
 
     @Override
@@ -53,48 +52,73 @@ public class ShowCityWeatherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_city_weather);
 
         ButterKnife.bind(this);
-        Intent i = getIntent();
+        Intent chooseCityIntent = getIntent();
 
-        threadHandler = new Handler();
-
-        tvCityName.setText(i.getStringExtra("city"));
-
-        final String cityName = i.getStringExtra("city");
-        final int count = i.getIntExtra("count", 3);
+        cityName = chooseCityIntent.getStringExtra("city");
+        if(cityName == null || cityName.equals("")){
+            finish();
+        }
+        count = chooseCityIntent.getIntExtra("count", 3);
 
         RetrofitInterface rInterface = ApiManager.getRetrofitInterface();
 
-        Call<WeatherData> call = rInterface.getPrognoza(cityName, count);
-        call.enqueue(new Callback<WeatherData>() {
-            @Override
-            public void onResponse(Call<WeatherData> call, Response<WeatherData> response) {
-                if(response.isSuccessful()){
-                    WeatherData responseBody = (WeatherData) response.body();
-                    model = response.body();
-                    pripremiListu(cityName, count);
-                    startListView();
-                }
-            }
+        Callback weatherDataCallBack = createCallBack();
 
-            @Override
-            public void onFailure(Call<WeatherData> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Greška u dohvaćanju podataka!", Toast.LENGTH_LONG);
-            }
-
-        });
-
+        ApiManager.getWeatherData(this, cityName, count, weatherDataCallBack);
     }
 
-    private void pripremiListu(String cityName, int count) {
+    @DebugTrace
+    private Callback createCallBack() {
+
+        Callback weatherDataCallBack = new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                model = (WeatherData) response.body();
+                prepareList(cityName, count);
+                startListView();
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                Notificationfactory message = toastFactory.getToast(Toast.LENGTH_LONG, getApplicationContext());
+                message.writeToastMessage("Neuspjeli poziv web servisa!");
+                try {
+                    Thread.sleep(3000);
+                }catch (InterruptedException ex){
+                    ex.printStackTrace();
+                }
+                finish();
+            }
+        };
+        return weatherDataCallBack;
+    }
+
+    private void prepareList(String cityName, int count) {
+        tvCityName.setText(model.getCity().getName());
+        String date, minTemp, maxTemp, desc;
 
         for(int i = 0; i < count; i++){
-            String date = getDate(i);
-            String minTemp = String.valueOf(model.getList().get(i).getTemp().getMin());
-            String maxTemp = String.valueOf(model.getList().get(i).getTemp().getMax());
-            String desc = model.getList().get(i).getWeather().get(0).getDescription();
-            listWeatherReport.add(new Prognoza(minTemp, maxTemp, desc, cityName, date));
-        }
+            if(i > 0){
+                if(model.getList().get(i) == model.getList().get(i-1)){
+                    addToList((Prognoza) listWeatherReport.get(listWeatherReport.size()-1).getClone());
+                    continue;
+                }
+            }
+            date = getDate(i);
+            minTemp = String.valueOf(model.getList().get(i).getTemp().getMin());
+            maxTemp = String.valueOf(model.getList().get(i).getTemp().getMax());
+            desc = model.getList().get(i).getWeather().get(0).getDescription();
 
+            PrognozaBuilder pb = new PrognozaBuilder(minTemp, maxTemp, desc, cityName, date);
+
+            Prognoza p = pb.createPrognoza();
+
+            addToList(p);
+        }
+    }
+
+    private void addToList(Prognoza p) {
+        listWeatherReport.add(p);
     }
 
     private void startListView() {

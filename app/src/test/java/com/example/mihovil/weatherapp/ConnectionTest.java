@@ -18,21 +18,25 @@ import static org.mockito.Mockito.mock;
  * Created by Mihovil on 13/08/2017.
  */
 
+
 public class ConnectionTest implements TestStrategy {
+
     @Mock
     ConnectivityManager connManager;
 
-    @Rule public MockitoRule mockitoRule = MockitoJUnit.rule();
+    @Rule
+    public MockitoRule mockitoRule = MockitoJUnit.rule();
 
     @Before
-    public void setup(){
+    @Override
+    public void setup() {
         connManager = mock(ConnectivityManager.class);
     }
 
+    @Override
     @Test
-    public void runTest(){
+    public void runTest() {
         ConnectionState connState = ConnectionState.getInstance(connManager);
-        final ConnectivityManager conMan = mock(ConnectivityManager.class);
-        Assert.assertFalse(connState.isON());
+        Assert.assertTrue(connState.isON());
     }
 }

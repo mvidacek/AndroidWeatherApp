@@ -1,7 +1,6 @@
 package com.example.mihovil.weatherapp.model;
 
 import android.content.Context;
-import android.os.Handler;
 import android.util.Log;
 
 import com.example.mihovil.weatherapp.R;
@@ -25,8 +24,6 @@ public class YoutubeHelper {
     private YouTube.Search.List list;
     private String videoID = "";
 
-    Handler threadHandler;
-
     private static final String youtubeAPiKey = "AIzaSyAKTHAfYD4JALas4Upke6PazQYSeIkpWU0";
 
     public YoutubeHelper(Context context){
@@ -34,8 +31,6 @@ public class YoutubeHelper {
             @Override
             public void initialize(HttpRequest request) throws IOException {}
         }).setApplicationName(context.getString(R.string.app_name)).build();
-
-        threadHandler = new Handler();
 
         try{
             list = youtube.search().list("id,snippet");
