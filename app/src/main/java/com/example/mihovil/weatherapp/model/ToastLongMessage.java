@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 public class ToastLongMessage extends Notificationfactory {
 
+    public  ToastLongMessage(){}
+
     @Override
     public int getLength() {
         length = Toast.LENGTH_LONG;

@@ -47,10 +47,6 @@ public class ChooseCityActivity extends AppCompatActivity {
         setDaysLimit();
 
         addBtnListener();
-
-
-        Notificationfactory message = toastFactory.getToast(Toast.LENGTH_LONG, getApplicationContext());
-        message.writeToastMessage("placeholder text");
     }
 
     private void addBtnListener() {

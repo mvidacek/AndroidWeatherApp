@@ -8,6 +8,8 @@ import android.widget.Toast;
  */
 
 public class NullToastMessage extends Notificationfactory {
+    public NullToastMessage(){}
+
     @Override
     public int getLength() {
         length = Toast.LENGTH_LONG;
