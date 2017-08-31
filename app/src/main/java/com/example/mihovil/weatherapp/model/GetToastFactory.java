@@ -21,4 +21,17 @@ public class GetToastFactory {
             return new NullToastMessage(context);
         }
     }
+
+    public Notificationfactory getToast(int length){
+
+        if(length == Toast.LENGTH_SHORT){
+            return new ToastShortMessage();
+        }
+        else if(length == Toast.LENGTH_LONG){
+            return new ToastLongMessage();
+        }
+        else{
+            return new NullToastMessage();
+        }
+    }
 }

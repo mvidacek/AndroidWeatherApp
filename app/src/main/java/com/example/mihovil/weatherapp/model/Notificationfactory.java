@@ -15,6 +15,8 @@ public abstract class Notificationfactory {
 
     public abstract int getLength();
 
+    public  Notificationfactory(){}
+
     public Notificationfactory(Context context){
         this.context = context;
     }
