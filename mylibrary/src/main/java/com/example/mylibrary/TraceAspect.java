@@ -42,13 +42,13 @@ public class TraceAspect {
 
     private static String buildLogMessage(String methodName, long methodDuration) {
         StringBuilder message = new StringBuilder();
-        message.append("\n\n\nDebug logger zapis koristeci TraceAspect!!!! --> ");
+        message.append("Debug logger zapis koristeci TraceAspect!!!! --> ");
         message.append(methodName);
         message.append(" --> ");
         message.append("[");
         message.append(methodDuration);
         message.append("ms");
-        message.append("]\n\n\n");
+        message.append("]");
 
         return message.toString();
     }
