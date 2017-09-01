@@ -6,6 +6,6 @@ package com.example.mihovil.weatherapp.model.PrognozaBuilder;
 
 public interface PrototypePtrn {
 
-    public PrototypePtrn getClone();
+    public Object getClone();
 
 }

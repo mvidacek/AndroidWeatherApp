@@ -3,7 +3,7 @@ package com.example.mihovil.weatherapp.model.PrognozaBuilder;
 /**
  * Created by Mihovil on 26/1/2017.
  */
-public class Prognoza implements PrototypePtrn {
+public class Prognoza implements PrototypePtrn, Cloneable {
 
     private String minTemp;
     private String maxTemp;
@@ -70,10 +70,16 @@ public class Prognoza implements PrototypePtrn {
 
 
     @Override
-    public PrototypePtrn getClone() {
+    public Object getClone() {
 
-        PrognozaBuilder pb = new PrognozaBuilder(this.minTemp, this.maxTemp, this.description, this.cityName, this.date);
+        try{
+            return this.clone();
+        } catch (CloneNotSupportedException ex){
+            ex.printStackTrace();
 
-        return pb.createPrognoza();
+            PrognozaBuilder pb = new PrognozaBuilder(this.minTemp, this.maxTemp, this.description, this.cityName, this.date);
+
+            return pb.createPrognoza();
+        }
     }
 }
