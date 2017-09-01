@@ -11,29 +11,34 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ShowYoutubeVideoActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
     private static final String youtubeApiKey = "AIzaSyAKTHAfYD4JALas4Upke6PazQYSeIkpWU0";
     private String videoID = "";
 
-    private YoutubeHelper searchHelper;
+    @BindView(R.id.youtubePlayerView)
+    YouTubePlayerView youtubeVideo;
+
+    private YoutubeHelper searchHelper = new YoutubeHelper(getApplicationContext());;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_youtube_video);
 
-        searchHelper = new YoutubeHelper(getApplicationContext());
+        ButterKnife.bind(this);
 
         Intent i = getIntent();
 
         searchHelper.search(i.getStringExtra("keywords"));
 
-        YouTubePlayerView youtube = (YouTubePlayerView)findViewById(R.id.youtubePlayerView);
         while(videoID.equals("")){
             videoID = searchHelper.getVideoID();
         }
-        youtube.initialize(youtubeApiKey, this);
+        youtubeVideo.initialize(youtubeApiKey, this);
     }
 
     @DebugTrace
@@ -50,5 +55,6 @@ public class ShowYoutubeVideoActivity extends YouTubeBaseActivity implements You
     @Override
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
         Toast.makeText(getApplicationContext(), "Failed to load youtube video", Toast.LENGTH_LONG);
+        finish();
     }
 }

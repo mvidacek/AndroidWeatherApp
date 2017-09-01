@@ -30,7 +30,6 @@ public class ChooseCityActivity extends AppCompatActivity {
     Button btnConfirm;
 
     private static ConnectionState connState;
-    private ConnectivityManager checkConnection;
     private GetToastFactory toastFactory = new GetToastFactory();
 
     @Override
@@ -41,8 +40,6 @@ public class ChooseCityActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         connectToService();
-
-        checkConnection();
 
         setDaysLimit();
 
@@ -74,26 +71,9 @@ public class ChooseCityActivity extends AppCompatActivity {
 
     @DebugTrace
     private void connectToService() {
-        checkConnection = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        try{
-            Thread.sleep(100);
-        }catch (InterruptedException ex){
-            ex.printStackTrace();
-        }
-
         connState = ConnectionState.getInstance((ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE));
 
         connState.showNetworkInfo(this);
-    }
-
-    private boolean checkConnection() {
-        if(checkConnection.getActiveNetworkInfo() == null){
-            Notificationfactory message = toastFactory.getToast(Toast.LENGTH_LONG, getApplicationContext());
-            message.writeToastMessage("Aplikacija nema pristup internetu. \nAplikacija nece moci pristupiti potrebnim materijalima");
-            return false;
-        }
-        return true;
     }
 
     private void GetWeather(String s) {
